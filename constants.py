@@ -1,0 +1,18 @@
+"""Module defining application-wide simulation and visual constants."""
+
+ITERATIONS = 25
+EPSILON = 0.01
+GRID_SIZE = 100
+CELL_SIZE = 6
+WIDTH = GRID_SIZE * CELL_SIZE
+HEIGHT = GRID_SIZE * CELL_SIZE
+
+# Simulation Constants
+CHARGE_MAGNITUDE = 100.0
+MAX_POTENTIAL_DISPLAY = 100.0
+MAX_EFIELD_DISPLAY = 50.0
+FPS = 60
+
+# Colors
+COLOR_POS_CHARGE = (255, 255, 0)
+COLOR_NEG_CHARGE = (0, 255, 255)
