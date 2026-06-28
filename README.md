@@ -1,10 +1,13 @@
 # Electrostatics Simulator
 
-A robust 2D electrostatics solver and visualizer written in Python. This project computes the electrical potential and electric field lines for any user-defined charge density distribution using numerical methods. 
+Welcome to the Electrostatics Simulator! This project is a 2D computational environment designed to solve and visualize electric potential and electric field lines for any custom charge distribution you want to create.
 
-It features two distinct modes:
-1. **Interactable Mode (Pygame)**: A real-time sandbox where the user can paint charges onto a grid and observe the electrical potential naturally diffuse and reach equilibrium at 60 FPS.
-2. **Analytic Mode (Matplotlib)**: A mathematically rigorous solver that computes the potential field up to a strict convergence limit, outputting a high-quality topological heatmap and streamline plot of the electric field.
+Whether you want to experiment interactively or run mathematically precise calculations, there are two modes you can explore:
+
+1. **Interactable Mode (Pygame)**: An interactive real-time sandbox. You can paint charges directly onto the grid with your mouse and watch the potential field settle into equilibrium live at 60 FPS.
+2. **Analytic Mode (Matplotlib)**: A precise numerical solver. It iterates until the entire field reaches a strict mathematical convergence limit, generating clean heatmaps and streamline vector plots of the electric field.
+
+Feel free to dive into `main.py`, modify the density functions, and test out your own electrostatics configurations!
 
 ---
 
@@ -28,29 +31,32 @@ It features two distinct modes:
 
 ---
 
-## The Mathematics
+## How It Works: The Mathematics
+
+Understanding the physics under the hood makes experimenting even more fun. Here is how the simulator computes fields from charge distributions:
 
 ### 1. Poisson's Equation
-In electrostatics, the electrical potential $V$ at any point in space is directly related to the charge density $\rho$ at that point by Poisson's Equation:
+In electrostatics, the electric potential $V$ at any point in space relates directly to the charge density $\rho$ via Poisson's Equation:
 $$ \nabla^2 V = -\frac{\rho}{\epsilon_0} $$
-This simulator normalizes the constants (treating $\epsilon_0 = 1$) to solve: 
+For simplicity and numerical stability, we set $\epsilon_0 = 1$, which simplifies the equation in two dimensions to: 
 $$ \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} = -\rho $$
 
 ### 2. The Jacobi Method (Numerical Solver)
-To solve this differential equation on a 2D discrete grid, the finite difference method is utilized. Approximating the second derivatives using the values of neighboring grid cells and rearranging the equation yields the Jacobi Iteration formula:
+To solve this equation on a discrete 2D grid, we use finite differences. By approximating the derivatives using neighboring grid cells, we arrive at the Jacobi iteration formula:
 $$ V_{i,j} = \frac{1}{4}(V_{i+1,j} + V_{i-1,j} + V_{i,j+1} + V_{i,j-1} + \rho_{i,j}) $$
 
-This algorithm functions as a relaxation method. By calculating the average of the four surrounding cells and adding the localized charge iteratively, the mathematical errors gradually diffuse until the numerical grid converges to the true potential field.
+Think of this as a relaxation technique. In each step, every cell updates to become the average of its four neighbors plus local charge contributions. Over multiple iterations, errors smooth out until the grid naturally converges to the steady-state potential field.
 
 ### 3. The Electric Field
-The Electric Field $\mathbf{E}$ is the negative gradient of the potential $V$:
+The electric field $\mathbf{E}$ is defined as the negative gradient of the potential field $V$:
 $$ \mathbf{E} = -\nabla V $$
-Once the potential field $V$ is solved, the simulator calculates the numerical derivative in both the X and Y directions to define the continuous vector field of the electric field.
+Once we have calculated the potential $V$, we compute spatial derivatives in the X and Y directions to determine the direction and magnitude of the electric field everywhere on the grid.
 
 ---
 
-## Sample Density Functions
-You can modify `density_function(x, y)` in `main.py` to simulate various physical scenarios. The following represent standard theoretical density functions encountered in electrostatics:
+## Try It Yourself: Starter Density Functions
+
+To help you get started, here are a few fun configurations you can try. Simply open `main.py` and replace `density_function(x, y)` with any of these snippets, or write your own custom mathematical functions!
 
 ### 1. Point Charge
 A single localized point of charge.
@@ -60,7 +66,7 @@ def point_charge(x: int, y: int) -> float:
 ```
 
 ### 2. Electric Dipole
-Two equal but opposite charges separated by a defined distance.
+Two equal but opposite charges separated by a short distance.
 ```python
 def electric_dipole(x: int, y: int) -> float:
     if x == 40 and y == 50:
@@ -78,7 +84,7 @@ def line_charge(x: int, y: int) -> float:
 ```
 
 ### 4. Parallel Plate Capacitor
-Two parallel plates bearing opposite charges, generating a uniform internal electric field.
+Two parallel plates with opposite charges, creating a uniform field between them.
 ```python
 def parallel_plates(x: int, y: int) -> float:
     if x == 30 and 20 <= y <= 80:
@@ -87,3 +93,5 @@ def parallel_plates(x: int, y: int) -> float:
         return 100.0
     return 0.0
 ```
+
+Have fun experimenting with your own shapes, mathematical formulas, and charge setups!
