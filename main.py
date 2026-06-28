@@ -4,6 +4,9 @@ from gaming.game import ElectroStaticsSimulator
 from charge_density import set_rho, rho
 import numpy as np
 
+class NoDensityFunction(Exception):
+    pass
+
 def density_function(x: int, y: int) -> float:
     """
     User-defined charge density function.
@@ -15,9 +18,13 @@ def density_function(x: int, y: int) -> float:
     :return: The charge density at the specified coordinates.
     :rtype: float
     """
-    return -100 if x <= 50 else 100
+    raise NoDensityFunction("Please Enter Your Density Function!!!")
 
 if __name__ == "__main__":
+    try:
+        density_function(1,1)
+    except NoDensityFunction as e:
+        raise NoDensityFunction("Please Enter Your Density Function!!!")
     mode = input("Choose mode - Interactable (1) or Analytic (2): ").strip()
     
     print("Make sure you have entered your density function....")
