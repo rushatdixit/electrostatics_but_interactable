@@ -37,19 +37,32 @@ Understanding the physics under the hood makes experimenting even more fun. Here
 
 ### 1. Poisson's Equation
 In electrostatics, the electric potential $V$ at any point in space relates directly to the charge density $\rho$ via Poisson's Equation:
-$$ \nabla^2 V = -\frac{\rho}{\epsilon_0} $$
-For simplicity and numerical stability, we set $\epsilon_0 = 1$, which simplifies the equation in two dimensions to: 
-$$ \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} = -\rho $$
+
+$$
+\nabla^2 V = -\frac{\rho}{\epsilon_0}
+$$
+
+For simplicity and numerical stability, we set $\epsilon_0 = 1$, which simplifies the equation in two dimensions to:
+
+$$
+\frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} = -\rho
+$$
 
 ### 2. The Jacobi Method (Numerical Solver)
 To solve this equation on a discrete 2D grid, we use finite differences. By approximating the derivatives using neighboring grid cells, we arrive at the Jacobi iteration formula:
-$$ V_{i,j} = \frac{1}{4}(V_{i+1,j} + V_{i-1,j} + V_{i,j+1} + V_{i,j-1} + \rho_{i,j}) $$
+
+$$
+V_{i,j} = \frac{1}{4}(V_{i+1,j} + V_{i-1,j} + V_{i,j+1} + V_{i,j-1} + \rho_{i,j})
+$$
 
 Think of this as a relaxation technique. In each step, every cell updates to become the average of its four neighbors plus local charge contributions. Over multiple iterations, errors smooth out until the grid naturally converges to the steady-state potential field.
 
 ### 3. The Electric Field
 The electric field $\mathbf{E}$ is defined as the negative gradient of the potential field $V$:
-$$ \mathbf{E} = -\nabla V $$
+
+$$
+\mathbf{E} = -\nabla V
+$$
 Once we have calculated the potential $V$, we compute spatial derivatives in the X and Y directions to determine the direction and magnitude of the electric field everywhere on the grid.
 
 ---
