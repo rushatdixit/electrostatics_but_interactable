@@ -109,3 +109,31 @@ def parallel_plates(x: int, y: int) -> float:
 ```
 
 Have fun experimenting with your own shapes, mathematical formulas, and charge setups!
+
+---
+
+## Getting Started
+
+Follow these steps to download the simulator and run it on your own machine.
+
+### 1. Clone the Repository
+Open your terminal and clone the repository using Git:
+```bash
+git clone https://github.com/rushatdixit/electrostatics_but_interactable.git
+cd electrostatics_but_interactable
+```
+
+### 2. Install Dependencies
+This project requires Python 3 and a few external libraries. You can install all necessary dependencies via `pip`:
+```bash
+pip install numpy matplotlib pygame
+```
+
+### 3. Run the Simulator
+Launch the program by running the main script:
+```bash
+python main.py
+```
+You will be prompted in the terminal to choose between **Interactable (1)** or **Analytic (2)** mode, and you can simply press `ENTER` through the coordinate prompts to use the default bounding region.
+
+Enjoy exploring the world of electric fields!
