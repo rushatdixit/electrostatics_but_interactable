@@ -10,8 +10,13 @@ It features two distinct modes:
 
 ## Sample Results
 
-### Analytic Solver Output (Dipole)
+### Analytic Solver Output
+
+*Electric Dipole (+q, -q)*
 ![Analytic Solver Dipole](sample_results/analytic_dipole.png)
+
+*Same Charge Pair (+q, +Q)*
+![Analytic Solver Same Charge](sample_results/analytic_same_charge.png)
 
 ### Real-Time Pygame Output (Dipole)
 *Potential Heatmap (Left) and E-Field Magnitude (Right)*
