@@ -63,6 +63,7 @@ The electric field $\mathbf{E}$ is defined as the negative gradient of the poten
 $$
 \mathbf{E} = -\nabla V
 $$
+
 Once we have calculated the potential $V$, we compute spatial derivatives in the X and Y directions to determine the direction and magnitude of the electric field everywhere on the grid.
 
 ---
